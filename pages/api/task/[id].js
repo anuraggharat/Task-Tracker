@@ -1,29 +1,62 @@
-export default function handler(req, res) {
-  const { method } = req;
+import Task from "../../../models/Task";
 
+export default async function handler(req, res) {
+  const { method,query } = req;
+  console.log(query)
   switch (method) {
 
-    case "GET":
-        //todo 
-        //return a task
+    case "GET": 
+    try {
 
-        break;
+        const task = await Task.findById(query.id);
+        res.status(200).json({ status: 200, task: task, success: true });
+
+    } catch (error) {
+                    res
+                      .status(400)
+                      .json({
+                        success: false,
+                        message: "Unable to find task!",
+                      });
+
+    }
+
+    break;
 
     case "PUT":
-        //todo
-        //make a edit task request
-        console.log(req.query)
-        res.status(200).json({ name: req.query });
-        break;
+    try {
+        const task = await Task.findByIdAndUpdate(query.id,req.body,{
+          new:true,
+          runValidators:true
+        });
+        res.status(200).json({ status: 200, task: task, success: true });
+
+    } catch (error) {
+                    res
+                      .status(400)
+                      .json({
+                        success: false,
+                        message: "Unable to update task!",
+                      });
+
+    }
 
     case "DELETE":
-        //todo 
-        // delete task request
-        res.status(200).json({ name: "POST" });
+        
+                try {
+                  const task = await Task.findByIdAndDelete({_id:query.id});
 
+                  res.status(200).json({ status: 200, task: task, success: true ,message:`Deleted task ${task.name}`});
+                } catch (error) {
+                  res.status(400).json({
+                    success: false,
+                    message: "Unable to delete task!",
+                  });
+                }
         break;
 
     default:
+      res.status(400).json({ success: false });
       break;
   }
 }

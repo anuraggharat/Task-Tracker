@@ -1,28 +1,36 @@
+import dbConnect from "../../../db/dbconnect";
+import Task from "../../../models/Task";
 
-
-
-
-export default function handler(req, res) {
-
-    const {method} = req
-
+dbConnect();
+export default async (req, res)=>{
+    const { method } = req;
     switch (method) {
-      case "GET":
-          console.log(req.query)
-        res.status(200).json({ name: "GET" });
+    
+    //get all tasks
+    case "GET":
+                try {
+                    const tasks = await Task.find({})
+                    res.status(200).json({success:true,tasks})
 
-        break;
+                } catch (error) {
+                    res.status(400).json({success:false,message:"Unable to find Tasks"})
+                }
+                break;
+    //post a new task
+    case "POST":
+                try {
+                    const task = await Task.create(req.body)
+                    res.status(200).json({status:300,success:true,task:task,message:"New Task Added"})
 
-      case "POST":
-        res.status(200).json({ name: "POST" });
-
-        break;
-
-      default:
-        break;
-    }
+                } catch (error) {
+                    console.log("in Error");
+                    res.status(400).json({success:false,message:"Unable to Create Task",error:error})
+                }
+                break;
 
 
-
-
+    default:
+                res.status(400).json({ success: false });
+                break;
+  }
 }
