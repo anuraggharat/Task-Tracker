@@ -1,14 +1,16 @@
+import axios from "axios";
+import { Router,useRouter } from "next/router";
 import React,{useState,useEffect} from "react";
 
 
 export default function Task() {
 
-
+const router = useRouter()
     
 const [values, setValues] = useState({
   name: "",
   category: "House",
-  date: "",
+  due: "",
   priority: "High",
   status:"Todo"
 });
@@ -16,8 +18,21 @@ const [values, setValues] = useState({
 console.log(values);
 
 
-const addTask=()=>{
-
+const addTask=async(e)=>{
+  e.preventDefault()
+  try {
+    const {data} = await axios.post("http://localhost:3000/api/task",values)
+    if(data.success){
+      alert("Task Added")
+      router.push("/")
+    }
+    else{
+      alert("Unable to add Task");
+    }
+  } catch (error) { 
+    console.log(error)
+    
+  }
 }
 
 
@@ -100,8 +115,8 @@ const handleChange=(e)=>{
                 className="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="due-date"
                 type="date"
-                name="date"
-                value={values.date}
+                name="due"
+                value={values.due}
                 onChange={(e) => handleChange(e)}
               />
             </div>
@@ -157,7 +172,7 @@ const handleChange=(e)=>{
                 onChange={(e) => handleChange(e)}
               >
                 <option value="Todo">Todo</option>
-                <option value="In Progress">In Progress</option>
+                <option value="Doing">In Progress</option>
                 <option value="Done">Done</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -178,6 +193,7 @@ const handleChange=(e)=>{
               <button
                 className="shadow bg-blue-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                 type="button"
+                onClick={(e)=>addTask(e)}
               >
                 Add Task
               </button>

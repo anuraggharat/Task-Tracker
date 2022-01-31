@@ -15,9 +15,7 @@ export default function Home(props) {
       const doing = tasks.filter((item) => (item.status == "Doing"));
       const done = tasks.filter((item) => (item.status == "Done"));
 
-      //console.log("todos",todos);
-       console.log("doing",doing);
-      // console.log("done",done);
+  
 
 
 
