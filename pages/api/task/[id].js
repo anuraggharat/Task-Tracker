@@ -25,11 +25,11 @@ export default async function handler(req, res) {
 
     case "PUT":
     try {
-        const task = await Task.findByIdAndUpdate(query.id,req.body,{
-          new:true,
-          runValidators:true
+        const task = await Task.findByIdAndUpdate(query.id, req.body, {
+          new: true,
+          runValidators: true,
         });
-        res.status(200).json({ status: 200, task: task, success: true });
+        return res.status(200).json({ status: 200, task: task, success: true });
 
     } catch (error) {
                     res

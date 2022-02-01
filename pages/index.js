@@ -42,6 +42,7 @@ export default function Home(props) {
         <div className="">
           <h3>Completed</h3>
           {done.map((done, index) => (
+            
             <Card data={done} key={index} />
           ))}
         </div>

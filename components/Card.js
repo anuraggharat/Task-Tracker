@@ -4,9 +4,8 @@ import Link from 'next/link'
 export default function Card({data}) {
 
   const due =new Date(data.due)
-  console.log(data)
   return (
-    <Link href={`/task`}>
+    <Link href={`/task/${data._id}`}>
       <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-100 my-3">
         <div className="px-3 pt-3 pb-1">
           <div className="font-bold text-xl mb-1 flex flex-row items-center text-grey-500">
