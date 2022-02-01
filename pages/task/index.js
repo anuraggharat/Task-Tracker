@@ -6,6 +6,9 @@ import React,{useState,useEffect} from "react";
 export default function Task() {
 
 const router = useRouter()
+
+const [alert,setAlert] = useState(false)
+const [message, setMessage] = useState("");
     
 const [values, setValues] = useState({
   name: "",
@@ -15,26 +18,28 @@ const [values, setValues] = useState({
   status:"Todo"
 });
 
-console.log(values);
 
 
 const addTask=async(e)=>{
+  setAlert(false)
   e.preventDefault()
   try {
     const {data} = await axios.post("http://localhost:3000/api/task",values)
     if(data.success){
-      alert("Task Added")
+    
       router.push("/")
     }
     else{
-      alert("Unable to add Task");
+      console.log(data.message);
+
+
     }
   } catch (error) { 
     console.log(error)
     
   }
 }
-
+  console.log(values)
 
 const handleChange=(e)=>{
     setValues({...values,[e.target.name]:e.target.value})
@@ -45,7 +50,7 @@ const handleChange=(e)=>{
         <div className="container text-center py-5 mb-2">
           <h2 className="text-3xl font-bold">Add a New Task</h2>
         </div>
-        <form className="w-full  mx-auto">
+        <form className="w-1/2  mx-auto">
           <div className="md:flex md:items-center mb-6 mx-auto">
             <div className="md:w-1/3 mx-auto">
               <label
@@ -57,7 +62,7 @@ const handleChange=(e)=>{
             </div>
             <div className="md:w-2/3">
               <input
-                className="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="bg-white appearance-none border border-gray-200 rounded w-full  px-3 py-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="task-name"
                 type="text"
                 name="name"
@@ -112,7 +117,7 @@ const handleChange=(e)=>{
             </div>
             <div className="md:w-2/3 relative">
               <input
-                className="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="bg-white appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="due-date"
                 type="date"
                 name="due"
@@ -193,7 +198,7 @@ const handleChange=(e)=>{
               <button
                 className="shadow bg-blue-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                 type="button"
-                onClick={(e)=>addTask(e)}
+                onClick={(e) => addTask(e)}
               >
                 Add Task
               </button>

@@ -6,7 +6,7 @@ const TaskSchema = new mongoose.Schema({
     type: String,
   },
   due: {
-    type: Date,
+    type: String,
   },
   category: {
     type: String,

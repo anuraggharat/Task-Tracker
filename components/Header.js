@@ -3,9 +3,9 @@ import React from "react";
 
 export default function Header() {
   return (
-    <div className="flex flex-row w-100 justify-between content-center items-center">
+    <div className="flex flex-row w-100 justify-between content-center items-center pb-4">
       <div>
-        <h1 className="text-slate-800 hover:text-sky-400 text-2xl">
+        <h1 className="text-slate-800 hover:text-sky-400 text-2xl font-bold">
           Task Tracker
         </h1>
       </div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Router, { useRouter } from "next/router";
+import Link from "next/link";
 
 
 
@@ -12,41 +13,46 @@ function EditTask({pageProps}) {
   const [values, setValues] = useState({
     name: data.name,
     category: data.category,
-    due: data.due,
+    due: new Date(data.due).toISOString().split("T")[0],
     priority: data.priority,
     status: data.status,
   });
 
-  console.log(values)
+  //new Date(data.due).toISOString().split("T")[0];
+  // we get the date string in this format and then we split the string in two parts in between t
+  //2022-02-01T00:00:00.000Z
+  // [2022-02-01] [00:00::000]
 
-  const updateTask = async() => {
-    console.log("sending for update",values)
-   try {
-     const res = await axios(`http://localhost:3000/api/task/${data._id}`, {
-       method: "PUT",
-       headers: {
-         "Content-Type": "application/json",
-       },
-       data: JSON.stringify(values),
-     });
-     console.log(res)
-     Router.push("/");
-   } catch (error) {
-     console.log(error);
-   }
+  const updateTask = async () => {
+    console.log("sending for update", values);
+    try {
+      const res = await axios(`http://localhost:3000/api/task/${data._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(values),
+      });
+      console.log(res);
+      Router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const deleteTask =async () =>{
+  const deleteTask = async () => {
     try {
-        const res =await axios.delete(`http://localhost:3000/api/task/${data._id}`);
-        alert(res.data.message)
-        router.push("/")
-        } catch (error) {
-      console.log('====================================');
+      const res = await axios.delete(
+        `http://localhost:3000/api/task/${data._id}`
+      );
+      alert(res.data.message);
+      router.push("/");
+    } catch (error) {
+      console.log("====================================");
       console.log(error);
-      console.log('====================================');      
+      console.log("====================================");
     }
-  }
+  };
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -55,12 +61,11 @@ function EditTask({pageProps}) {
   return (
     <div className="w-100 ">
       <div className="container text-center py-5 mb-2">
-        <h2 className="text-3xl font-bold">Add a New Task</h2>
-        <p>{data._id}</p>
+        <h2 className="text-3xl font-bold">Update Task</h2>
       </div>
-      <form className="w-full  mx-auto">
+      <form className="w-1/2  mx-auto">
         <div className="md:flex md:items-center mb-6 mx-auto">
-          <div className="md:w-1/3 mx-auto">
+          <div className="w-1/3 ">
             <label
               className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               htmlFor="task-name"
@@ -68,9 +73,9 @@ function EditTask({pageProps}) {
               Task Name
             </label>
           </div>
-          <div className="md:w-2/3">
+          <div className=" w-2/3">
             <input
-              className="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-white appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="task-name"
               type="text"
               name="name"
@@ -125,7 +130,7 @@ function EditTask({pageProps}) {
           </div>
           <div className="md:w-2/3 relative">
             <input
-              className="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-white appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="due-date"
               type="date"
               name="due"
@@ -201,17 +206,27 @@ function EditTask({pageProps}) {
         </div>
 
         <div className="md:flex md:items-center">
-          <div className="md:w-1/3"></div>
+          <div className="w-1/3 float-right">
+            <Link href={`/`}>
+              <button
+                className="shadow  float-right bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mr-4"
+                type="button"
+                onClick={(e) => updateTask(e)}
+              >
+                Back
+              </button>
+            </Link>
+          </div>
           <div className="md:w-2/3">
             <button
-              className="shadow bg-blue-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className="shadow bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
               type="button"
               onClick={(e) => updateTask(e)}
             >
-              Add Task
+              Update Task
             </button>
             <button
-              className="shadow bg-blue-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className="shadow bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               type="button"
               onClick={(e) => deleteTask(e)}
             >
