@@ -69,7 +69,7 @@ function EditTask({pageProps}) {
       </div>
       <form className="md:w-5/6 w-full  mx-auto">
         <div className="md:flex md:items-center mb-6 mx-auto">
-          <div className="w-1/3 ">
+          <div className="md:w-1/3 mx-auto">
             <label
               className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               htmlFor="task-name"
@@ -77,9 +77,9 @@ function EditTask({pageProps}) {
               Task Name
             </label>
           </div>
-          <div className=" w-2/3">
+          <div className="md:w-2/3">
             <input
-              className="bg-white appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+              className="bg-white appearance-none border border-gray-200 rounded w-full  px-3 py-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
               id="task-name"
               type="text"
               name="name"
