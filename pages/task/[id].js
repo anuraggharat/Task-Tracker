@@ -26,7 +26,7 @@ function EditTask({pageProps}) {
   const updateTask = async () => {
     console.log("sending for update", values);
     try {
-      const res = await axios(`http://localhost:3000/api/task/${data._id}`, {
+      const res = await axios(`${process.env.URL}/api/task/${data._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function EditTask({pageProps}) {
   const deleteTask = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/task/${data._id}`
+        `${process.env.URL}/api/task/${data._id}`
       );
       alert(res.data.message);
       router.push("/");
@@ -248,7 +248,7 @@ export async function getServerSideProps({ query }) {
 
   try {
     const res = await axios(
-      `http://localhost:3000/api/task/${id}`
+      `${process.env.URL}/api/task/${id}`
     );
     const {task} =res.data;
     return {

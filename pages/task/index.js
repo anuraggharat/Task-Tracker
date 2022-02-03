@@ -24,7 +24,7 @@ const addTask=async(e)=>{
   setAlert(false)
   e.preventDefault()
   try {
-    const {data} = await axios.post("http://localhost:3000/api/task",values)
+    const { data } = await axios.post(`${process.env.URL}/api/task`, values);
     if(data.success){
     
       router.push("/")
