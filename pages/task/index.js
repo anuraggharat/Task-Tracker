@@ -93,6 +93,9 @@ const handleChange=(e)=>{
                 <option value="Personal">Personal</option>
                 <option value="Freelancing">Freelancing</option>
                 <option value="Work">Work</option>
+                <option value="Project">Project</option>
+                <option value="Study">Study</option>
+                <option value="Social Media">Social Media</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
