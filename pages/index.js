@@ -51,7 +51,9 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-  
+
+
+  console.log(process.env.URL)
   const res = await axios(`${process.env.URL}/api/task`);
   const {tasks } = res.data;
   return {

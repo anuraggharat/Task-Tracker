@@ -26,13 +26,16 @@ function EditTask({pageProps}) {
   const updateTask = async () => {
     console.log("sending for update", values);
     try {
-      const res = await axios(`${process.env.URL}/api/task/${data._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(values),
-      });
+      const res = await axios(
+        `${process.env.NEXT_PUBLIC_URL}/api/task/${data._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify(values),
+        }
+      );
       console.log(res);
       Router.push("/");
     } catch (error) {
@@ -43,7 +46,7 @@ function EditTask({pageProps}) {
   const deleteTask = async () => {
     try {
       const res = await axios.delete(
-        `${process.env.URL}/api/task/${data._id}`
+        `${process.env.NEXT_PUBLIC_URL}/api/task/${data._id}`
       );
       alert(res.data.message);
       router.push("/");

@@ -18,13 +18,19 @@ const [values, setValues] = useState({
   status:"Todo"
 });
 
+  console.log("url", process.env.NEXT_PUBLIC_URL);
 
 
 const addTask=async(e)=>{
+  console.log(process.env.URL);
   setAlert(false)
   e.preventDefault()
   try {
-    const { data } = await axios.post(`${process.env.URL}/api/task`, values);
+    
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_URL}/api/task`,
+      values
+    );
     if(data.success){
     
       router.push("/")
