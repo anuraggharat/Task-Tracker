@@ -53,10 +53,10 @@ const handleChange=(e)=>{
 
     return (
       <div className="w-100 ">
-        <div className="container text-center py-5 mb-2">
+        <div className="container  text-center py-5 mb-2">
           <h2 className="text-3xl font-bold">Add a New Task</h2>
         </div>
-        <form className="w-1/2  mx-auto">
+        <form className="md:w-5/6 w-full  mx-auto ">
           <div className="md:flex md:items-center mb-6 mx-auto">
             <div className="md:w-1/3 mx-auto">
               <label
@@ -68,7 +68,7 @@ const handleChange=(e)=>{
             </div>
             <div className="md:w-2/3">
               <input
-                className="bg-white appearance-none border border-gray-200 rounded w-full  px-3 py-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="bg-white appearance-none border border-gray-200 rounded w-full  px-3 py-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 id="task-name"
                 type="text"
                 name="name"
@@ -89,7 +89,7 @@ const handleChange=(e)=>{
             </div>
             <div className="md:w-2/3 relative">
               <select
-                className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 id="category"
                 name="category"
                 defaultValue={values.category}
@@ -126,7 +126,7 @@ const handleChange=(e)=>{
             </div>
             <div className="md:w-2/3 relative">
               <input
-                className="bg-white appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="bg-white appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 id="due-date"
                 type="date"
                 name="due"
@@ -146,7 +146,7 @@ const handleChange=(e)=>{
             </div>
             <div className="md:w-2/3 relative">
               <select
-                className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 id="priority"
                 name="priority"
                 defaultValue={values.priority}
@@ -179,7 +179,7 @@ const handleChange=(e)=>{
             </div>
             <div className="md:w-2/3 relative">
               <select
-                className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                 id="task"
                 name="status"
                 defaultValue={values.status}
